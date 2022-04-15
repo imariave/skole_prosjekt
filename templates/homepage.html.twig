@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+    <h1>Hjemmeside</h1>
+
+    <div class="product-list">
+        {% for bike in bikes %}
+        <div>
+            {% if bike.image %}<a href="/produkt/{{ bike.id }}"><img src="/images/{{ bike.image }}" alt=""></a> {% endif %}
+            <h2><a href="/produkt/{{ bike.id }}">{{ bike.navn }}</a></h2>
+            NOK {{ bike.pris }}
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
