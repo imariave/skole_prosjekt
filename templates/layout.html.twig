@@ -13,7 +13,10 @@
     <body>
         <header>
             Sykkel AS Nettbutikk
-            <he>
+            {% if app.session.get('basket') %}
+                <a href="/basket">Vis Kurv</a>
+            {% endif %}
+            <hr>
         </header>
         <main>
             {% block content %} {% endblock %}

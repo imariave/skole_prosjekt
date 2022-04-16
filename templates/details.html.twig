@@ -1,0 +1,33 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+    <div class="breadcrumbs">
+        <a href="/">Hjemmeside</a> &raquo;
+
+    </div>
+
+    <h1>Hjemmeside</h1>
+
+    <div class="product-details">
+        <div>
+            {% if bike.image %}<a href="/produkt/{{ bike.id }}"><img src="/images/{{ bike.image }}" alt="">
+                </a> {% endif %}
+        </div>
+        <div>
+            <h1> {{ bike.navn }}</h1>
+            <p> NOK{{ bike.pris }}</p>
+            <form method="post">
+                {% if inBasket %}
+                    <button disabled>Lagt i handlekurven</button>
+                {% else %}
+                    <button>Legg i handlekurv</button>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+
+    {% if bike.beskrivelse %}<p> {{ bike.beskrivelse }} </p>{% endif %}
+
+{% endblock %}
