@@ -12,6 +12,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
 use App\Entity\Bestilling;
 use App\Repository\ProduktRepository;
 
@@ -25,7 +29,7 @@ class CheckoutController extends AbstractController
      * @Route("/checkout")
      */
 
-    public function checkout(Request $request, ProduktRepository $repo, SessionInterface $session): Response
+    public function checkout(Request $request, ProduktRepository $repo, SessionInterface $session, MailerInterface $mailer): Response
     {
        $basket = $session->get('basket', []);
        $total=array_sum(array_map(function ($produkt) { return $produkt->getPris(); }, $basket));
@@ -52,6 +56,10 @@ class CheckoutController extends AbstractController
            $entityManager->persist($bestilling);
            $entityManager->flush();
 
+           $this->sendEmailConfirmation($bestilling, $mailer);
+
+           $session->set('basket', []);
+
            return $this->render('confirmation.html.twig');
        }
 
@@ -66,4 +74,16 @@ class CheckoutController extends AbstractController
         ]);
     }
 
+    private function sendEmailConfirmation( Bestilling $bestilling, MailerInterface  $mailer)
+    {
+        $epost = (new TemplatedEmail())
+            ->from('hei@sykkel-as.com')
+            ->to(new Address($bestilling->getEpost(), $bestilling->getNavn()))
+            ->subject('Bestillings bekreftelse')
+            ->htmlTemplate('emails/order.html.twig')
+            ->context(['bestilling' => $bestilling]);
+
+        $mailer->send($epost);
+
+    }
 }

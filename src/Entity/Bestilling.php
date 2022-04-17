@@ -40,10 +40,10 @@ class Bestilling
 
     public function __construct()
     {
-        $this->produkt = new ArrayCollection();
+        $this->produkt = new ArrayCollection;
     }
 
-    public function getId(): ArrayCollection
+    public function getId(): ?int
     {
         return $this->id;
     }

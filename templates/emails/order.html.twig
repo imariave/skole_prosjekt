@@ -1,0 +1,12 @@
+<h1>Bestlling #{{ bestilling.id }}</h1>
+
+<p>Takk for bestillingen. Du har kjøpt følgende:</p>
+
+<ul>
+    {% for produkt in bestilling.products %}
+        <li>{{ produkt.navn }}</li>
+    {% endfor %}
+
+</ul>
+
+<p>Vi vil bekrefte når bestillingen din er sendt.</p>
