@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+
+    <div class="breadcrumbs">
+        <a href="/">Hjemmeside</a> &raquo;
+
+    </div>
+
+    <h1>Sjekk Ut Bestilling</h1>
+
+   <div class="checkout-total">
+       <div>Total</div>
+       <div>NOK{{ total | number_format(2) }}</div>
+   </div>
+
+    {{ form(form) }}
+
+{% endblock %}
