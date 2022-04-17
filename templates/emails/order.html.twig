@@ -1,10 +1,10 @@
-<h1>Bestlling #{{ bestilling.id }}</h1>
+<h1>Bestilling #{{ bestilling.id }}</h1>
 
 <p>Takk for bestillingen. Du har kjøpt følgende:</p>
 
 <ul>
     {% for produkt in bestilling.products %}
-        <li>{{ produkt.navn }}</li>
+        <li>{{ produkt.navn }} NOK{{ produkt.pris }}</li>
     {% endfor %}
 
 </ul>
