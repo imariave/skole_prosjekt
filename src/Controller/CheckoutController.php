@@ -39,7 +39,21 @@ class CheckoutController extends AbstractController
            ->add('save', SubmitType::class, ['label' => 'Bekreft bestilling'])
            ->getForm();
 
-       
+       $form->handleRequest($request);
+
+       if ($form->isSubmitted() && $form->isValid()) {
+           $bestilling = $form->getData();
+
+           foreach ($basket as $produkt) {
+               $bestilling->getProducts()->add($repo->find($produkt->getId()));
+           }
+
+           $entityManager = $this->getDoctrine()->getManager();
+           $entityManager->persist($bestilling);
+           $entityManager->flush();
+
+           return $this->render('confirmation.html.twig');
+       }
 
        if ($request->isMethod('POST')) {
            unset($basket[$request->request->get('id')]);

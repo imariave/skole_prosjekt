@@ -36,16 +36,16 @@ class Bestilling
     /**
      * @ORM\ManyToMany(targetEntity="produkt")
      */
-    private $products;
+    private $produkt;
 
     public function __construct()
     {
-        return $this->id;
+        $this->produkt = new ArrayCollection();
     }
 
     public function getId(): ArrayCollection
     {
-        return $this->products = new ArrayCollection;
+        return $this->id;
     }
 
     public function getNavn(): ?string
@@ -87,6 +87,6 @@ class Bestilling
 
     public function getProducts()
     {
-        return $this->products;
+        return $this->produkt;
     }
 }
