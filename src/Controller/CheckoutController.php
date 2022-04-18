@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -38,8 +40,8 @@ class CheckoutController extends AbstractController
 
        $form = $this->createFormBuilder($bestilling)
            ->add('navn', TextType::class)
-           ->add('epost', TextType::class)
-           ->add('kontaktnr', TextType::class)
+           ->add('epost', EmailType::class)
+           ->add('kontaktnr', NumberType::class)
            ->add('addresse', TextareaType::class)
            ->add('save', SubmitType::class, ['label' => 'Bekreft bestilling'])
            ->getForm();
