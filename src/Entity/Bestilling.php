@@ -27,6 +27,11 @@ class Bestilling
      */
     private $epost;
 
+    /**
+     * @ORM\Column(type="integer", length=10)
+     */
+    private $kontaktnr;
+
 
     /**
      * @ORM\Column(type="text")
@@ -68,6 +73,18 @@ class Bestilling
     public function setEpost(string $epost): self
     {
         $this->epost = $epost;
+
+        return $this;
+    }
+
+    public function getKontaktnr(): ?int
+    {
+        return $this->kontaktnr;
+    }
+
+    public function setKontaktnr(int $kontaktnr): self
+    {
+        $this->kontaktnr = $kontaktnr;
 
         return $this;
     }

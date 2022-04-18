@@ -39,6 +39,7 @@ class CheckoutController extends AbstractController
        $form = $this->createFormBuilder($bestilling)
            ->add('navn', TextType::class)
            ->add('epost', TextType::class)
+           ->add('kontaktnr', TextType::class)
            ->add('addresse', TextareaType::class)
            ->add('save', SubmitType::class, ['label' => 'Bekreft bestilling'])
            ->getForm();
